@@ -9,17 +9,16 @@ GO
 	Procedimiento almacenado encargado de la inserción de nuevas dimensiones enviando el nombre
 */
 CREATE PROCEDURE dbo.insertDimension -- LISTO
-	@nombreDimension	VARCHAR(50),
-	@ID_Componente		INT 
+	@nombreDimension	VARCHAR(50)
 AS 
 	BEGIN
-		IF ((SELECT COUNT(*) FROM dbo.Dimensiones AS D WHERE D.Dimension = @nombreDimension AND D.ID_Componente = @ID_Componente) = 1)
+		IF ((SELECT COUNT(*) FROM dbo.Dimensiones AS D WHERE D.Dimension = @nombreDimension) = 1)
 			BEGIN
 				RAISERROR('La dimensión que intenta insertar ya se encuentra registrada.',16,1);
 			END;
 		ELSE
 			BEGIN
-				INSERT INTO dbo.Dimensiones (Dimension, ID_Componente)  VALUES (@nombreDimension,@ID_Componente);
+				INSERT INTO dbo.Dimensiones (Dimension)  VALUES (@nombreDimension);
 			END;			
 	END;
 GO
@@ -27,25 +26,18 @@ GO
 	Procedimiento almacenado encargado de la edición de de dimensiones y recibe por parámetro el ID de la dimensión a 
 	editar y el nuevo nombre que se le va a asignar
 */
+
+select * from Dimensiones
 CREATE PROCEDURE dbo.editDimension -- LISTO
 	@ID_Dimension		INT,
-	@nombreDimension	VARCHAR(50),
-	@ID_Componente		INT
+	@nombreDimension	VARCHAR(50)
 AS
 	BEGIN
 		IF ((SELECT COUNT(*) FROM dbo.Dimensiones AS D WHERE D.ID = @ID_Dimension) = 1)
 			BEGIN
-				IF ((SELECT COUNT(*) FROM dbo.Componentes AS D WHERE D.ID = @ID_Componente) = 1)
-					BEGIN
-						UPDATE dbo.Dimensiones 
-						SET Dimension= @nombreDimension,
-							ID_Componente = @ID_Componente
-						WHERE ID = @ID_Dimension;
-					END;
-				ELSE
-					BEGIN
-						RAISERROR('El componente que intenta asociar no se encuentra registrado.',16,1);
-					END;
+				UPDATE dbo.Dimensiones 
+				SET Dimension= @nombreDimension
+				WHERE ID = @ID_Dimension;
 			END;
 		ELSE
 			BEGIN
@@ -82,34 +74,51 @@ GO
 	Procedimiento almacenado encargado de la inserción de nuevos componentes enviando el nombre y la dimension a la que pertenece
 */
 CREATE PROCEDURE dbo.insertComponente -- listo
-	@nombreComponente	VARCHAR(50)
+	@nombreComponente	VARCHAR(50),
+	@ID_Dimension		INT
 AS 
 	BEGIN
-		IF ((SELECT COUNT(*) FROM dbo.Componentes AS C WHERE C.Componente = @nombreComponente) = 1)
+		IF ((SELECT COUNT(*) FROM dbo.Componentes AS C WHERE C.Componente = @nombreComponente AND C.ID_Dimension = @ID_Dimension) = 1)
 			BEGIN
 				RAISERROR('El componente que intenta insertar ya se encuentra registrado.',16,1);
 			END;
 		ELSE
 			BEGIN
-				INSERT INTO dbo.Componentes (Componente)  VALUES (@nombreComponente);
+				IF ((SELECT COUNT(*) FROM dbo.Dimensiones AS C WHERE C.ID = @ID_Dimension) = 1)
+					BEGIN
+						INSERT INTO dbo.Componentes (Componente, ID_Dimension)  VALUES (@nombreComponente, @ID_Dimension);
+					END;
+				ELSE
+					BEGIN
+						RAISERROR('La dimension que intenta asociar no se encuentra registrada.',16,1);
+					END;
 			END;
 	END;
 GO
+
 /*
 	Procedimiento almacenado encargado de la edición de componentes y recibe por parámetro el ID del componente a 
 	editar, el ID de la nueva dimensión y el nuevo nombre que se le va a asignar
 */
 CREATE PROCEDURE dbo.editComponente -- listo
 	@ID_Componente		INT,
+	@ID_Dimension		INT,
 	@nombreComponente	VARCHAR(50)
 AS
 	BEGIN
 		IF ((SELECT COUNT(*) FROM dbo.Componentes AS C WHERE C.ID = @ID_Componente) = 1) -- existe el componente a editar
 			BEGIN
-				UPDATE dbo.Componentes 
-				SET Componente= @nombreComponente
-				WHERE ID = @ID_Componente;
-					
+				IF ((SELECT COUNT(*) FROM dbo.Dimensiones AS C WHERE C.ID = @ID_Dimension) = 1)
+					BEGIN
+						UPDATE dbo.Componentes 
+						SET Componente= @nombreComponente,
+							ID_Dimension = @ID_Dimension
+						WHERE ID = @ID_Componente;
+					END;
+				ELSE
+					BEGIN
+						RAISERROR('La dimension que intenta asociar no se encuentra registrada.',16,1);
+					END;					
 			END;
 		ELSE
 			BEGIN
