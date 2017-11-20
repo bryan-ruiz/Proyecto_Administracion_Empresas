@@ -6,7 +6,9 @@
 var logicaComponente = require('../Logica/logicaComponentes.js');
 
 exports.insertComponente = function(rRequest, rResponse){
-    logicaComponente.insertarComponente(rRequest.body, function(data){
+    console.log("controladorComponente: "+rRequest);
+    /// >>>> en caso de enviar un objeto json desde el frontend solamente paso el rRequest, no debo hace un .algo <<<<
+    logicaComponente.insertarComponente(rRequest.query, function(data){
         rResponse.send(data);
     })
 };
@@ -19,7 +21,7 @@ exports.editComponente = function(rRequest, rResponse){
 
 exports.selectComponente = function(rRequest, rResponse){
     logicaComponente.seleccionarComponente(function(data){
-        rResponse.send(data);
+        rResponse.send(data.data);
     })
 };
 

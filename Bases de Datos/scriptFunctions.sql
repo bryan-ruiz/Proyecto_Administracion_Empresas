@@ -8,26 +8,31 @@ GO
 /*
 	Procedimiento almacenado encargado de la inserción de nuevas dimensiones enviando el nombre
 */
+
 CREATE PROCEDURE dbo.insertDimension -- LISTO
-	@nombreDimension	VARCHAR(50)
+	@nombreDimension	VARCHAR(50),
+	@success			BIT		OUTPUT
 AS 
 	BEGIN
 		IF ((SELECT COUNT(*) FROM dbo.Dimensiones AS D WHERE D.Dimension = @nombreDimension) = 1)
 			BEGIN
-				RAISERROR('La dimensión que intenta insertar ya se encuentra registrada.',16,1);
+				SET @success = 0
+				SELECT @success
 			END;
 		ELSE
 			BEGIN
 				INSERT INTO dbo.Dimensiones (Dimension)  VALUES (@nombreDimension);
+				SET @success = 1
+				SELECT @success
 			END;			
 	END;
 GO
+
 /*
 	Procedimiento almacenado encargado de la edición de de dimensiones y recibe por parámetro el ID de la dimensión a 
 	editar y el nuevo nombre que se le va a asignar
 */
 
-select * from Dimensiones
 CREATE PROCEDURE dbo.editDimension -- LISTO
 	@ID_Dimension		INT,
 	@nombreDimension	VARCHAR(50)
@@ -74,23 +79,32 @@ GO
 	Procedimiento almacenado encargado de la inserción de nuevos componentes enviando el nombre y la dimension a la que pertenece
 */
 CREATE PROCEDURE dbo.insertComponente -- listo
-	@nombreComponente	VARCHAR(50),
-	@ID_Dimension		INT
+	@Componente	VARCHAR(50),
+	@ID_Dimension		INT,
+	@success			BIT		OUTPUT,
+	@msg		VARCHAR(50)		OUTPUT
 AS 
 	BEGIN
-		IF ((SELECT COUNT(*) FROM dbo.Componentes AS C WHERE C.Componente = @nombreComponente AND C.ID_Dimension = @ID_Dimension) = 1)
+		IF ((SELECT COUNT(*) FROM dbo.Componentes AS C WHERE C.Componente = @Componente AND C.ID_Dimension = @ID_Dimension) = 1)
 			BEGIN
-				RAISERROR('El componente que intenta insertar ya se encuentra registrado.',16,1);
+				RAISERROR('El componente que intenta registrar ya se encuentra registrado.',16,1);
+				SET @success = 0 --error
+				SELECT @success
 			END;
 		ELSE
 			BEGIN
 				IF ((SELECT COUNT(*) FROM dbo.Dimensiones AS C WHERE C.ID = @ID_Dimension) = 1)
 					BEGIN
-						INSERT INTO dbo.Componentes (Componente, ID_Dimension)  VALUES (@nombreComponente, @ID_Dimension);
+						INSERT INTO dbo.Componentes (Componente, ID_Dimension)  VALUES (@Componente, @ID_Dimension);
+						SET @success = 1 --exito
+						SET @msg = 'Listo papu'
+						SELECT @success
 					END;
 				ELSE
 					BEGIN
 						RAISERROR('La dimension que intenta asociar no se encuentra registrada.',16,1);
+						SET @success = 0 --error
+						SELECT @success
 					END;
 			END;
 	END;

@@ -4,20 +4,19 @@
 ===============================================================================================
 */
 
-var consultsPreparer = require('../ConexionDBs/consultsPreparer.js');
+var consultsPreparerDimensiones = require('../ConexionDBs/consultsPreparerDimensiones');
 
-// inserta componentes
-exports.insertarComponente = function(datos, callback) {
-    console.log("logicaComponente: "+datos);
-    consultsPreparer.insertComponente(datos, function(response) {
-        msg = (response.error == 1) ? "Error de conexión" : "No se pudo insertar el componente";
+// inserta dimensiones
+exports.insertarDimension = function(datos, callback) {
+    consultsPreparerDimensiones.insertDimension(datos, function(response) {
+        msg = (response.error == 1) ? "Error de conexión" : "No se pudo insertar la dimensión";
         if (response.success) {
             callback({
                 success: true,
                 data: response.data,
                 error: response.error,
-                title: "Componente agregado",
-                message: "Componente agregado con exito",
+                title: "Dimensión agregada",
+                message: "Dimensión agregada con exito",
                 type: "success"
             })
         } else {
@@ -32,12 +31,11 @@ exports.insertarComponente = function(datos, callback) {
     });
 };
 
-// seleccionar componentes
-exports.seleccionarComponente = function(callback) {
-    consultsPreparer.selectComponente( function(response) {
+// seleccionar dimension
+exports.seleccionarDimension = function(callback) {
+    consultsPreparerDimensiones.selectDimension( function(response) {
         if (response.success) {
             msg = (response.error == 1) ? "Error de conexión" : "No se pudo seleccionar los componentes";
-            //console.log(response.data);
             callback({
                 data: response.data           
             })
@@ -52,17 +50,17 @@ exports.seleccionarComponente = function(callback) {
     });
 };
 
-// editar componentes
-exports.editarComponente = function(datos, callback) {
-    consultsPreparer.editComponente(datos, function(response) {
-        msg = (response.error === 1) ? "Error de conexión" : "No se pudo modificar el componente";
+// editar dimension
+exports.editarDimension = function(datos, callback) {
+    consultsPreparerDimensiones.editDimension(datos, function(response) {
+        msg = (response.error === 1) ? "Error de conexión" : "No se pudo modificar la dimensión";
         if (response.success) {
             callback({
                 success: true,
                 data: response.data,
                 error: response.error,
-                title: "Componente editado",
-                message: "Componente editado con exito",
+                title: "Dimensión editada",
+                message: "Dimensión editada con exito",
                 type: "success"
             })
         } else {
@@ -77,17 +75,17 @@ exports.editarComponente = function(datos, callback) {
     });
 };
 
-// eliminar componentes
-exports.eliminarComponente = function(datos, callback) {
-    consultsPreparer.deleteComponente(datos, function(response) {
-        msg = (response.error === 1) ? "Error de conexión" : "No se puede eliminar el componente";
+// eliminar dimension
+exports.eliminarDimension = function(datos, callback) {
+    consultsPreparerDimensiones.deleteDimension(datos, function(response) {
+        msg = (response.error === 1) ? "Error de conexión" : "No se puede eliminar la dimensión";
         if (response.success) {
             callback({
                 success: true,
                 data: [],
                 error: response.error,
-                title: "Componente eliminado",
-                message: "Componente eliminado con éxito",
+                title: "Dimensión eliminada",
+                message: "Dimensión eliminada con éxito",
                 type: "success"
             })
         } else {

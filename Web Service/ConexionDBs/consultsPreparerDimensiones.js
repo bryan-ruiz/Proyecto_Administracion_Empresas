@@ -11,9 +11,9 @@ var sqlConection = require('./sqlConection.js');
 >   - delete              <
 ===========================
 */
-exports.insertComponente = function insertComponente(datos, callback) {
+exports.insertDimension = function insertDimension(datos, callback) {
     console.log("consultsPreparer: "+datos);
-    var request = new Request('insertDimension', function(err) { // nombre de procedimiento en la base de datos
+    var request = new Request('insertComponente', function(err) { // nombre de procedimiento en la base de datos
         if (err) {
             callback({
                 success: false,
@@ -33,7 +33,7 @@ exports.insertComponente = function insertComponente(datos, callback) {
     });
 }
 
-exports.selectComponente = function(callback) {   
+exports.selectDimension = function(callback) {   
     console.log('Preparar consulta'); 
     var query = "SELECT * FROM Dimensiones"; //Agregar procedimiento almacenado para esta consulta
     var request = new Request(query, function(err) {
@@ -54,7 +54,7 @@ exports.selectComponente = function(callback) {
     sqlConection.executeRequest(request, callback); 
 }
 
-exports.editComponente = function editComponente(datos, callback) {
+exports.editDimension = function editDimension(datos, callback) {
     var request = new Request('editComponente', function(err) {
         if (err) {
             callback({
@@ -74,7 +74,7 @@ exports.editComponente = function editComponente(datos, callback) {
     sqlConection.callProcedure(request, callback);
 };
 // DELETE 
-exports.deleteComponente = function deleteComponente(datos, callback) {
+exports.deleteDimension = function deleteDimension(datos, callback) {
     var request = new Request('deleteComponente', function(err) {
         if (err) {
             msg = (request.error == 1) ? "Error de conexión" : "No se puede eliminar el componente";

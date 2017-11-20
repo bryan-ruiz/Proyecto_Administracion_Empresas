@@ -184,8 +184,8 @@ Tabla CYEA_Responsables, tabla producida por la normalización de la relación ent
 USE AcreditacionTEC;
 GO
 CREATE TABLE CYEA_Responsables(
-	ID_CYEA			INT,
-	ID_Responsable	INT,
+	ID_CYEA				INT,
+	ID_Responsable		INT,
 	TipoResponsabilidad VARCHAR(250),
 	CONSTRAINT FK_CYEA_Responsables_ID_CYEA	FOREIGN KEY (ID_CYEA) 
 		REFERENCES	dbo.CYEA (ID) ON DELETE CASCADE ON UPDATE CASCADE,

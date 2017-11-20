@@ -37,6 +37,7 @@ connection.on('connect', function(err) {
  */
 exports.executeRequest = function executeRequest(request, callback) {
     'use strict';
+    console.log("sqlConection");
     var res = [],
         connection = new Connection(config);
 
@@ -46,12 +47,12 @@ exports.executeRequest = function executeRequest(request, callback) {
                 success: false,
                 data: err.message,
                 error: SIN_CONEXION,
-
             });
             return;
         }
-
-        request.on('row', function(columns) {
+        
+        request.on('row', function(columns) { // si devuelve datos llena res[]
+            console.log(res);
             var row = {};
             columns.forEach(function(column) {
                 if (column.value === null) {
@@ -62,9 +63,35 @@ exports.executeRequest = function executeRequest(request, callback) {
             });
             res.push(row);
         });
+
+        request.on('returnValue', function(parameterName, value, metadata) {
+            connection.close();
+            console.log("entro al return");
+            if (parameterName === 'success' && (value === 1 || value === true)) {
+                callback({
+                    success: true,
+                    data: res
+                });
+            } else {
+                callback({
+                    success: false,
+                    data: []
+                });
+            };
+        });
+
         
-        request.on('doneInProc', function (rowCount, more, rows) {  
-            console.log('doneInProc: '+ rowCount + ' row(s) returned');
+        request.on('done', function (rowCount, more, rows) { // si el tipo de exito es done llena callback
+            console.log(res);
+            callback({
+                success: true,
+                data: res,
+                error: 200
+            }); 
+        });
+
+        request.on('doneProc', function (rowCount, more, rows) { // si el tipo de exito es doneProc llena callback
+            //console.log('done: '+ rowCount + ' row(s) returned');
             console.log(res);
             callback({
                 success: true,
@@ -85,7 +112,7 @@ exports.executeRequest = function executeRequest(request, callback) {
 exports.callProcedure = function callProcedure(request, callback) {
     'use strict';
     var res = [],
-        connection = new Connection(config);
+    connection = new Connection(config);
 
     connection.on('connect', function(err) {
         if (err) {
@@ -106,13 +133,31 @@ exports.callProcedure = function callProcedure(request, callback) {
             });
             res.push(row);
         });
+        
+        request.on('returnValue', function(parameterName, value, metadata) {
+            connection.close();
+            console.log(metadata);
+            if (parameterName === 'success' && (value === 1 || value === true)) {
+                callback({
+                    success: true,
+                    data: res
+                });
+            } else {
+                callback({
+                    success: false,
+                    data: []
+                });
+            };
+        });
+        /*
         request.on('doneProc', function(rowCount, more, rows) {
             callback({
-                //success: true,
+                success: true,
                 data: res,
-               // error: 200
+                error: 200
             });
         });
+        */
         connection.callProcedure(request);
     });
 };
