@@ -1,22 +1,43 @@
-﻿// Code goes here
 
+// Code goes here
 var myApp = angular.module('myApp', ['angularUtils.directives.dirPagination']);
 myApp.controller('MyController', MyController);
 
 function MyController($scope) {
-
+  $scope.currentId = 0;
+  $scope.newPermission = {}
   $scope.currentPage = 1;
   $scope.pageSize = 10;
   $scope.permissions = [];
+  $scope.globalComponent = {}
   for (var i = 1; i <= 100; i++) {  
+    $scope.currentId = i;
     $scope.permission = {};
     $scope.permission.id = i;
-    $scope.permission.nombre = "permiso "+i;
+    $scope.permission.name = "permiso "+i;
     $scope.permissions.push($scope.permission);
   };
 
   $scope.remove = function(permission) {
     $scope.permissions.splice($scope.permissions.indexOf(permission),1);
+  }
+
+  $scope.addPermission = function() {
+    $scope.permission = {};
+    $scope.permission.id = $scope.currentId += 1;
+    $scope.permission.name = $scope.newPermission.name;
+    $scope.permissions.push($scope.permission); 
+    $scope.$apply();
+    console.log($scope.permissions);
+  }
+
+  $scope.addComponentToEditingModal = function(component) {
+    $scope.globalComponent = component;
+    $scope.oldComponent = component.name;
+  }
+
+  $scope.save = function() {
+    $scope.globalComponent.name = $scope.oldComponent;
   }
 }
 

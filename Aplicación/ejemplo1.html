@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Welcome To | Bootstrap Based Admin Template - Material Design</title>
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Preloader Css -->
+    <link href="plugins/material-design-preloader/md-preloader.css" rel="stylesheet" />
+
+    <!-- Morris Chart Css-->
+    <link href="plugins/morrisjs/morris.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="css/themes/all-themes.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style type="text/css">
+        input[type=text] {
+
+            width: 130px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            height: 38px;
+            font-size: 16px;    
+            background-color: white;
+            background-image: url('searchicon.png');
+            background-repeat: no-repeat;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+        input[type=text]:focus {
+            width: 80%;
+        }
+        input[type=text]:hover {
+            width: 80%;
+        }
+
+        .SearchingButton {
+          margin-top: 5%;
+          margin-left: 40%;
+          height: 55px;
+        }
+
+        .SearchingList {
+          margin-top: 8%;
+          margin-left: 40%;
+          margin-bottom: 8%;    
+        }
+
+        .CheckList {
+            margin-top: 8%;
+            margin-left: 25%;
+            border-radius: 7px 7px 7px 7px;
+            -moz-border-radius: 7px 7px 7px 7px;
+            -webkit-border-radius: 7px 7px 7px 7px;
+            border: 5px double #000000;
+                    }
+
+        .ComponentDesign {
+          width: 70%;
+          margin-bottom: 2%;
+          margin-left: 8%;
+          height: 30px;
+        }
+
+        .optionText {
+            position: absolute;
+        }
+
+        .optionButton {
+            margin-left: 20%;
+            position: absolute;
+        }
+
+
+    </style>
+
+</head>
+
+<body class="theme-blue">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="md-preloader pl-size-md">
+                <svg viewbox="0 0 75 75">
+                    <circle cx="37.5" cy="37.5" r="33.5" class="pl-red" stroke-width="4" />
+                </svg>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+
+    <!-- Top Bar -->
+    <nav class="navbar" style="background-color: #000033"> 
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="index.html">Administración de Empresas</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="images/user.png" width="48" height="48" alt="User" />
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nombre de Usuario</div>
+                    <div class="email">correo electrónico</div>
+                    <div class="btn-group user-helper-dropdown">
+                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Perfil</a></li>
+                            <li role="seperator" class="divider"></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">group</i>Asistentes</a></li>
+                            <li role="seperator" class="divider"></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Salir</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">PANEL PRINCIPAL</li>
+                    <li>
+                        <a href="index.html" class="active">
+                            <i class="material-icons">create</i>
+                            <span>Criterios y Estándares</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="material-icons">settings</i>
+                            <span>Plan de Trabajo</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="material-icons">dashboard</i>
+                            <span>Dimensiones</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="material-icons">lock_open</i>
+                            <span>Permisos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">extension</i>
+                            <span>Componentes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="material-icons">playlist_add_check</i>
+                            <span>Valoración</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="material-icons">pie_chart</i>
+                            <span>Informes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">widgets</i>
+                            <span>Evidencias</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="">
+                                    <i class="material-icons">attach_file</i>
+                                    <span>Cuestionarios</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <i class="material-icons">insert_drive_file</i>
+                                    <span>Otro</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i class="material-icons col-light-blue">donut_large</i>
+                            <span>Acerca de</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+            <div class="legal">
+                <div class="copyright">
+                    &copy; 2017 <a href="javascript:void(0);">Acreditación de Carreras <br> Administración de Empresas</a>.
+                </div>
+                <div class="version">
+                    <b>Version: </b> 0.1
+                </div>
+            </div>
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+    </section>
+
+    <!--Ventanas emergentes-->
+    <section class="content">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card" style="height: 500px">
+                <div class="header">
+                    <h4>Permisos</h4>
+                </div>
+                <div class="body">
+                    <div id="tableDimensiones2" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <!--HEADER-->
+                        <div class="row">
+                            
+                            <!--END BOTONES ACCIONES-->
+                            <!--INPUT SEARCH-->
+                            <div class="col-sm-6" >
+                                <div id="filterTableDimensiones" class="dataTables_filter">
+                                    <input id="componentInput" type="search" class="form-control input-sm" style="width: 100%;"
+                                           placeholder="Buscar" aria-controls="filterTableDimensiones">
+                                    
+                                </div>
+                            </div>
+
+                            <!--END INPUT SEARCH-->
+                            <!--BOTONES ACCIONES-->
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-primary" class="SearchingButton">
+                                    <span class="glyphicon glyphicon-search"></span> Buscar
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="myCreateFunction()">
+                                    <span class="glyphicon glyphicon-plus"></span> Agregar
+                                </button>
+                            </div>
+                        </div>
+                        <!--END HEADER-->
+                        <!--TABLA DIMENSIONES-->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-hover dataTable" id="dataTablePermisos">
+                                    <thead>
+                                    <tr role="row">
+                                        <th>#</th>
+                                        <th>Nombre de persona con permiso</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody >
+                                    <tr role="row" class="odd" ng-repeat="item in listaDimensiones ">
+                                        <!--<td>{{$index + 1}}</td>
+                                        <td>{{item.nombreComponente}}</td>
+                                        <td>
+                                            <a href="#" ng-click="">Editar</a> |
+                                            <a href="#" ng-click="">Eliminar</a>
+                                        </td>-->
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--END TABLA DIMENSIONES-->
+                        <!--FOOTER-->
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div id="dataTableDimensionInfo" class="dataTables_info" role="status" aria-live="polite">
+                                    Mostrando 4 - 10
+                                </div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div id="dataTableDimensionPagination" class="dataTables_paginate pagine_simple_numbers">
+                                    <ul class="pagination">
+                                        <li id="dataTableDimensionBtnBack" class="paginate_button previous">
+                                            <a aria-controls="dataTableDimensionBtnBack" data-dt-idx="0" tabindex="0">Anterior</a>
+                                        </li>
+                                        <li id="dataTableDimensionBtnNext" class="paginate_button next">
+                                            <a aria-controls="dataTableDimensionBtnNext" data-dt-idx="0" tabindex="0">Siguiente</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--END FOOTER-->
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </section>
+    <!--END VENTANAS EMERGENTES-->
+
+    <!-- Jquery Core Js -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+
+    <script src="plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="plugins/node-waves/waves.js"></script>
+
+    <!-- Jquery CountTo Plugin Js -->
+    <script src="plugins/jquery-countto/jquery.countTo.js"></script>
+
+    <!-- Morris Plugin Js -->
+    <script src="plugins/raphael/raphael.min.js"></script>
+    <script src="plugins/morrisjs/morris.js"></script>
+
+    <!-- ChartJs -->
+    <script src="plugins/chartjs/Chart.bundle.js"></script>
+
+    <!-- Flot Charts Plugin Js -->
+    <script src="plugins/flot-charts/jquery.flot.js"></script>
+    <script src="plugins/flot-charts/jquery.flot.resize.js"></script>
+    <script src="plugins/flot-charts/jquery.flot.pie.js"></script>
+    <script src="plugins/flot-charts/jquery.flot.categories.js"></script>
+    <script src="plugins/flot-charts/jquery.flot.time.js"></script>
+
+    <!-- Sparkline Chart Plugin Js -->
+    <script src="plugins/jquery-sparkline/jquery.sparkline.js"></script>
+
+    <!-- Custom Js -->
+    <script src="js/admin.js"></script>
+    <script src="js/pages/index.js"></script>
+
+    <!-- Demo Js -->
+    <script src="js/demo.js"></script>
+
+    <script >
+        var txt = "Hello World!";
+        var contador = 1;
+        function myCreateFunction() {
+            var table = document.getElementById("dataTablePermisos");
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = contador;
+            cell2.innerHTML = document.getElementById("componentInput").value;
+            document.getElementById("componentInput").value = "";
+            cell3.innerHTML = '<a href="#">Editar</a> | <a href="#">Eliminar</a>';
+            contador += 1;
+        }
+        var checkboxName = "";
+        $("input:checkbox").on('click', function() {
+            // in the handler, 'this' refers to the box clicked on
+            var $box = $(this);
+            if ($box.is(":checked")) {
+                // the name of the box is retrieved using the .attr() method
+                // as it is assumed and expected to be immutable
+                checkboxName = $box.attr("innerText");
+                var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                // the checked state of the group/box on the other hand will change
+                // and the current value is retrieved using .prop() method
+                $(group).prop("checked", false);
+                $box.prop("checked", true);
+            }     
+            else {
+                $box.prop("checked", false);
+            }
+
+            var check = document.getElementsByTagName('fooby[1][]');
+            for (var index = 0; index < check.length; index++) {
+                if (checkBox.id == check[index].htmlFor) {
+                    checkboxName = $box.attr("innerText"); 
+                    alert(check[index].innerText);
+                }
+            }
+        });
+        var x= [];
+
+        function changeText2(){
+            var firstname = document.getElementById('firstname').innerText;
+            document.getElementById('boldStuff2').innerHTML = firstname;
+            x.push(firstname);
+            document.getElementById('demo').innerHTML = x;
+        }
+
+        function function1() {
+            var firstname = document.getElementById("firstname").value;
+            var ul = document.getElementById("list");
+            var li = document.createElement("li");  
+            li.appendChild(document.createTextNode(checkboxName));
+            ul.appendChild(li);
+            document.getElementById('firstname').value = "";
+        }
+    </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
